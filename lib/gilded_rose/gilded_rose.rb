@@ -43,7 +43,7 @@ class GildedRose
       return
     end
 
-    if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert" && item.name != "Sulfuras, Hand of Ragnaros"
+    if item.name != "Backstage passes to a TAFKAL80ETC concert"
       decrease_item_quality(item)
     else
       if item.quality < MAX_QUALITY
@@ -60,16 +60,12 @@ class GildedRose
     end
     item.sell_in -= 1
     if item.sell_in < 0
-      if item.name != "Aged Brie"
-        if item.name != "Backstage passes to a TAFKAL80ETC concert"
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            decrease_item_quality(item)
-          end
-        else
-          item.quality = 0
+      if item.name != "Backstage passes to a TAFKAL80ETC concert"
+        if item.name != "Sulfuras, Hand of Ragnaros"
+          decrease_item_quality(item)
         end
       else
-        increase_item_quality(item)
+        item.quality = 0
       end
     end
   end
