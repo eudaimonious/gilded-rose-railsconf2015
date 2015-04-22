@@ -24,7 +24,7 @@ RSpec.describe GildedRose do
       expect(item.quality).to eq 8
     end
 
-    it "decreases sell_in by 1 each do" do
+    it "decreases sell_in by 1 each day" do
       expect(item.sell_in).to eq 4
     end
 
@@ -33,6 +33,44 @@ RSpec.describe GildedRose do
 
       it "decreases twice as fast" do
         expect(item.quality).to eq 6
+      end
+    end
+  end
+
+  describe "sulfuras" do
+    let(:item) { Item.new("Sulfuras, Hand of Ragnaros", 10, 10) }
+    before do
+      subject.update_item(item)
+    end
+
+    it "never decreases in quality" do
+      expect(item.quality).to eq 10
+    end
+
+    it "never decreases sell_in" do
+      expect(item.sell_in).to eq 10
+    end
+  end
+
+  describe "aged brie" do
+    let(:item) { Item.new("Aged Brie", 5, 10) }
+    before do
+      subject.update_item(item)
+    end
+
+    it "increases quality by 1 each day" do
+      expect(item.quality).to eq 11
+    end
+
+    it "decreases sell_in by 1 each day" do
+      expect(item.sell_in).to eq 4
+    end
+
+    context "past the sell_in date" do
+      let(:item) { Item.new("Aged Brie", -1, 10) }
+
+      it "increases quality twice as fast" do
+        expect(item.quality).to eq 12
       end
     end
   end
