@@ -1,7 +1,7 @@
 # The Gilded Rose Kata
 
-This is a version of the Gilded Rose kata with some initial setup for 
-[Randy Coulman](http://randycoulman.com/)'s 
+This is a version of the Gilded Rose kata with some initial setup for
+[Randy Coulman](http://randycoulman.com/)'s
 [Getting a Handle on Legacy Code workshop](http://railsconf.com/program/labs#prop_1024)
 at [RailsConf 2015](http://railsconf.com).
 
@@ -13,7 +13,7 @@ Once you've done that, you can do the following:
 * Run RSpec specs with `bundle exec rake spec`
 * Run [flog](https://github.com/seattlerb/flog) against the code with `bundle exec rake flog`
 
-Both Minitest tests and RSpec specs will automatically generate 
+Both Minitest tests and RSpec specs will automatically generate
 [Simplecov](https://github.com/colszowka/simplecov) coverage information.
 
 This kata starts from the version found at https://github.com/professor/GildedRose.
