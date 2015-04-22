@@ -1,7 +1,8 @@
 require_relative 'item'
 
 class GildedRose
-
+  MAX_QUALITY = 50
+  MIN_QUALITY = 0
   @items = []
 
   def initialize
@@ -16,50 +17,52 @@ class GildedRose
 
   def update_quality
 
-    for i in 0..(@items.size-1)
-      if (@items[i].name != "Aged Brie" && @items[i].name != "Backstage passes to a TAFKAL80ETC concert")
-        if (@items[i].quality > 0)
-          if (@items[i].name != "Sulfuras, Hand of Ragnaros")
-            @items[i].quality = @items[i].quality - 1
-          end
+    @items.each do |item|
+      if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
+        if item.name != "Sulfuras, Hand of Ragnaros"
+          decrease_item_quality(item)
         end
       else
-        if (@items[i].quality < 50)
-          @items[i].quality = @items[i].quality + 1
-          if (@items[i].name == "Backstage passes to a TAFKAL80ETC concert")
-            if (@items[i].sell_in < 11)
-              if (@items[i].quality < 50)
-                @items[i].quality = @items[i].quality + 1
-              end
+        if item.quality < MAX_QUALITY
+          item.quality += 1
+          if item.name == "Backstage passes to a TAFKAL80ETC concert"
+            if item.sell_in < 11
+              increase_item_quality(item)
             end
-            if (@items[i].sell_in < 6)
-              if (@items[i].quality < 50)
-                @items[i].quality = @items[i].quality + 1
-              end
+            if item.sell_in < 6
+              increase_item_quality(item)
             end
           end
         end
       end
-      if (@items[i].name != "Sulfuras, Hand of Ragnaros")
-        @items[i].sell_in = @items[i].sell_in - 1;
+      if item.name != "Sulfuras, Hand of Ragnaros"
+        item.sell_in -= 1
       end
-      if (@items[i].sell_in < 0)
-        if (@items[i].name != "Aged Brie")
-          if (@items[i].name != "Backstage passes to a TAFKAL80ETC concert")
-            if (@items[i].quality > 0)
-              if (@items[i].name != "Sulfuras, Hand of Ragnaros")
-                @items[i].quality = @items[i].quality - 1
-              end
+      if item.sell_in < 0
+        if item.name != "Aged Brie"
+          if item.name != "Backstage passes to a TAFKAL80ETC concert"
+            if item.name != "Sulfuras, Hand of Ragnaros"
+              decrease_item_quality(item)
             end
           else
-            @items[i].quality = @items[i].quality - @items[i].quality
+            item.quality = 0
           end
         else
-          if (@items[i].quality < 50)
-            @items[i].quality = @items[i].quality + 1
-          end
+          increase_item_quality(item)
         end
       end
+    end
+  end
+
+  def decrease_item_quality(item)
+    if item.quality > MIN_QUALITY
+      item.quality -= 1
+    end
+  end
+
+  def increase_item_quality(item)
+    if item.quality < MAX_QUALITY
+      item.quality += 1
     end
   end
 
