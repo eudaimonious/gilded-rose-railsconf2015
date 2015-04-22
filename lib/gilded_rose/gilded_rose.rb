@@ -43,6 +43,21 @@ class GildedRose
       return
     end
 
+    # if item.name == "Backstage passes to a TAFKAL80ETC concert"
+    #   increase_item_quality(item)
+    #   if item.sell_in < 11
+    #     increase_item_quality(item)
+    #   end
+    #   if item.sell_in < 6
+    #     increase_item_quality(item)
+    #   end
+    #   item.sell_in -= 1
+    #   if item.sell_in < 0
+    #     item.quality = 0
+    #   end
+    #   return
+    # end
+
     if item.name != "Backstage passes to a TAFKAL80ETC concert"
       decrease_item_quality(item)
     else

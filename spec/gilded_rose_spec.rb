@@ -74,4 +74,31 @@ RSpec.describe GildedRose do
       end
     end
   end
+
+  describe "backstage passes" do
+    let(:item) { Item.new("Backstage passes to a TAFKAL80ETC concert", 20, 10) }
+    before do
+      subject.update_item(item)
+    end
+
+    it "increases quality by 1 each day" do
+      expect(item.quality).to eq 11
+    end
+
+    it "decreases sell_in by 1 each day" do
+      expect(item.sell_in).to eq 19
+    end
+
+    context "past the sell_in date" do
+      let(:item) { Item.new("Backstage passes to a TAFKAL80ETC concert", -1, 10) }
+
+      it "decreases quality zero" do
+        expect(item.quality).to eq 0
+      end
+
+      it "decreases the sell_in date by 1" do
+        expect(item.sell_in).to eq -2
+      end
+    end
+  end
 end
